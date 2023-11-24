@@ -61,11 +61,6 @@ const introductionElement = document.getElementById("introduction");
 const perfectElement = document.getElementById("perfect");
 const restartButton = document.getElementById("restart");
 const scoreElement = document.getElementById("score");
-const wrapper = document.getElementById("wrapper");
-
-const content = document.getElementById("content");
-content.width = window.innerWidth;
-content.height = window.innerWidth;
 
 // Initialize layout
 resetGame();
@@ -78,7 +73,8 @@ function resetGame() {
   sceneOffset = 0;
   score = 0;
 
-  wrapper.style.display = "block"
+  introductionElement.style.opacity = 1;
+  perfectElement.style.opacity = 0;
   restartButton.style.display = "none";
   scoreElement.innerText = score;
 
@@ -152,7 +148,7 @@ function generatePlatform() {
 resetGame();
 
 // If space was pressed restart the game
-content.addEventListener("keydown", function (event) {
+window.addEventListener("keydown", function (event) {
   if (event.key == " ") {
     event.preventDefault();
     resetGame();
@@ -160,8 +156,7 @@ content.addEventListener("keydown", function (event) {
   }
 });
 
-content.addEventListener("touchstart", function (event) {
-  wrapper.style.display = "none"
+window.addEventListener("touchstart", function (event) {
   if (phase == "waiting") {
     lastTimestamp = undefined;
     introductionElement.style.opacity = 0;
@@ -170,14 +165,13 @@ content.addEventListener("touchstart", function (event) {
   }
 });
 
-content.addEventListener("touchend", function (event) {
+window.addEventListener("touchend", function (event) {
   if (phase == "stretching") {
     phase = "turning";
   }
 });
 
-content.addEventListener("mousedown", function (event) {
-  wrapper.style.display = "none"
+window.addEventListener("mousedown", function (event) {
   if (phase == "waiting") {
     lastTimestamp = undefined;
     introductionElement.style.opacity = 0;
@@ -186,7 +180,7 @@ content.addEventListener("mousedown", function (event) {
   }
 });
 
-content.addEventListener("mouseup", function (event) {
+window.addEventListener("mouseup", function (event) {
   if (phase == "stretching") {
     phase = "turning";
   }
