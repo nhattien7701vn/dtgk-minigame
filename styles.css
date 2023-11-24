@@ -3,6 +3,18 @@ body {
   height: 100%;
   margin: 0;
   user-select: none;
+  -webkit-touch-callout: none;
+  /* Safari */
+  -webkit-user-select: none;
+  /* Safari, Chrome, and Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by most modern browsers */
 }
 
 body {
