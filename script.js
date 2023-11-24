@@ -63,6 +63,10 @@ const restartButton = document.getElementById("restart");
 const scoreElement = document.getElementById("score");
 const wrapper = document.getElementById("wrapper");
 
+const content = document.getElementById("content");
+content.width = window.innerWidth;
+content.height = window.innerWidth;
+
 // Initialize layout
 resetGame();
 
@@ -148,7 +152,7 @@ function generatePlatform() {
 resetGame();
 
 // If space was pressed restart the game
-window.addEventListener("keydown", function (event) {
+content.addEventListener("keydown", function (event) {
   if (event.key == " ") {
     event.preventDefault();
     resetGame();
@@ -156,7 +160,7 @@ window.addEventListener("keydown", function (event) {
   }
 });
 
-window.addEventListener("touchstart", function (event) {
+content.addEventListener("touchstart", function (event) {
   wrapper.style.display = "none"
   if (phase == "waiting") {
     lastTimestamp = undefined;
@@ -166,13 +170,13 @@ window.addEventListener("touchstart", function (event) {
   }
 });
 
-window.addEventListener("touchend", function (event) {
+content.addEventListener("touchend", function (event) {
   if (phase == "stretching") {
     phase = "turning";
   }
 });
 
-window.addEventListener("mousedown", function (event) {
+content.addEventListener("mousedown", function (event) {
   wrapper.style.display = "none"
   if (phase == "waiting") {
     lastTimestamp = undefined;
@@ -182,7 +186,7 @@ window.addEventListener("mousedown", function (event) {
   }
 });
 
-window.addEventListener("mouseup", function (event) {
+content.addEventListener("mouseup", function (event) {
   if (phase == "stretching") {
     phase = "turning";
   }
