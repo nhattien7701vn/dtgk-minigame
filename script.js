@@ -381,50 +381,55 @@ function drawHero() {
   );
 
   // Body
-  drawRoundedRect(
-    -heroWidth / 2,
-    -heroHeight / 2,
-    heroWidth,
-    heroHeight - 4,
-    5
-  );
+
+  // drawRoundedRect(
+  //   -heroWidth / 2,
+  //   -heroHeight / 2,
+  //   heroWidth,
+  //   heroHeight - 4,
+  //   5
+  // );
   var img = new Image();
-  img.src = 'https://cdn.dienthoaigiakho.vn/photos/1681799249360-logo-giakho.svg';
-  ctx.drawImage(img, -heroWidth / 2.6, -heroHeight / 6.5, 13, 13);
+  img.src = 'https://cdn.dienthoaigiakho.vn/photos/1700820987096-hapi-drive.svg';
+  ctx.drawImage(img, -heroWidth / 0.4, -heroHeight / 0.55, 70, 70);
 
   // Legs
-  const legDistance = 5;
-  ctx.beginPath();
-  ctx.arc(legDistance, 11.5, 3, 0, Math.PI * 2, false);
-  ctx.fill();
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(-legDistance, 11.5, 3, 0, Math.PI * 2, false);
-  ctx.fill();
-  ctx.stroke();
+
+  // const legDistance = 5;
+  // ctx.beginPath();
+  // ctx.arc(legDistance, 11.5, 3, 0, Math.PI * 2, false);
+  // ctx.fill();
+  // ctx.stroke();
+  // ctx.beginPath();
+  // ctx.arc(-legDistance, 11.5, 3, 0, Math.PI * 2, false);
+  // ctx.fill();
+  // ctx.stroke();
 
   // Eye
-  ctx.beginPath();
-  ctx.fillStyle = "white";
-  ctx.arc(5, -7, 3, 0, Math.PI * 2, false);
-  ctx.fill();
-  ctx.stroke();
+
+  // ctx.beginPath();
+  // ctx.fillStyle = "white";
+  // ctx.arc(5, -7, 3, 0, Math.PI * 2, false);
+  // ctx.fill();
+  // ctx.stroke();
 
   // hat
-  ctx.beginPath();
-  ctx.fillStyle = "#efd400";
-  ctx.arc(2, -19, 4, 0, Math.PI * 2, false);
-  ctx.fill();
-  ctx.stroke();
+
+  // ctx.beginPath();
+  // ctx.fillStyle = "#efd400";
+  // ctx.arc(2, -19, 4, 0, Math.PI * 2, false);
+  // ctx.fill();
+  // ctx.stroke();
 
   // Band
-  ctx.beginPath();
-  ctx.fillStyle = "#e23718";
-  ctx.moveTo(-8.5, -7.5);
-  ctx.lineTo(-20, 7);
-  ctx.lineTo(-9, 3);
-  ctx.fill();
-  ctx.stroke();
+
+  // ctx.beginPath();
+  // ctx.fillStyle = "#e23718";
+  // ctx.moveTo(-8.5, -7.5);
+  // ctx.lineTo(-20, 7);
+  // ctx.lineTo(-9, 3);
+  // ctx.fill();
+  // ctx.stroke();
 
   ctx.restore();
 }
