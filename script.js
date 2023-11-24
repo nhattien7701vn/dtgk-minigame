@@ -61,6 +61,7 @@ const introductionElement = document.getElementById("introduction");
 const perfectElement = document.getElementById("perfect");
 const restartButton = document.getElementById("restart");
 const scoreElement = document.getElementById("score");
+const wrapper = document.getElementById("wrapper");
 
 // Initialize layout
 resetGame();
@@ -73,8 +74,7 @@ function resetGame() {
   sceneOffset = 0;
   score = 0;
 
-  introductionElement.style.opacity = 1;
-  perfectElement.style.opacity = 0;
+  wrapper.style.display = "block"
   restartButton.style.display = "none";
   scoreElement.innerText = score;
 
@@ -157,6 +157,7 @@ window.addEventListener("keydown", function (event) {
 });
 
 window.addEventListener("touchstart", function (event) {
+  wrapper.style.display = "none"
   if (phase == "waiting") {
     lastTimestamp = undefined;
     introductionElement.style.opacity = 0;
@@ -172,6 +173,7 @@ window.addEventListener("touchend", function (event) {
 });
 
 window.addEventListener("mousedown", function (event) {
+  wrapper.style.display = "none"
   if (phase == "waiting") {
     lastTimestamp = undefined;
     introductionElement.style.opacity = 0;

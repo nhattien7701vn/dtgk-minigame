@@ -26,11 +26,6 @@ body {
 }
 
 #introduction {
-  width: 200px;
-  height: 150px;
-  position: absolute;
-  font-weight: 600;
-  font-size: 0.8em;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   transition: opacity 2s;
@@ -94,6 +89,15 @@ body {
 #logo_logo {
   width: 100%;
   height: 100%;
+}
+
+#wrapper {
+  display: block;
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  font-weight: 600;
+  font-size: 0.8em;
 }
 
 /* #btn-click {
