@@ -19,6 +19,8 @@ let sceneOffset; // Moves the whole game
 let platforms = [];
 let sticks = [];
 let trees = [];
+const rainDrops = [];
+const snowflakes = [];
 
 // Todo: Save high score to localStorage (?)
 
@@ -50,10 +52,25 @@ const fallingSpeed = 2;
 
 const heroWidth = 17; // 24
 const heroHeight = 30; // 40
+const rainCanvas = document.getElementById("rainCanvas");
+const rainCtx = rainCanvas.getContext("2d");
+
+const snowCanvas = document.getElementById('snowCanvas');
+const snowCtx = snowCanvas.getContext('2d');
+
+const sunCanvas = document.getElementById('sunCanvas');
+const sunCtx = sunCanvas.getContext('2d');
 
 const canvas = document.getElementById("game");
 canvas.width = window.innerWidth; // Make the Canvas full screen
 canvas.height = window.innerHeight;
+rainCanvas.width = window.innerWidth;
+rainCanvas.height = window.innerHeight;
+sunCanvas.width = canvasWidth;
+sunCanvas.height = canvasHeight;
+
+const sunImage = new Image();
+sunImage.src = '/sun.png';
 
 const ctx = canvas.getContext("2d");
 
@@ -316,6 +333,126 @@ function thePlatformTheStickHits() {
 
   return [platformTheStickHits, false];
 }
+
+function createRainDrop() {
+  const x = Math.random() * rainCanvas.width;
+  const y = Math.random() * rainCanvas.height;
+  const length = Math.random() * 20 + 5;
+  const speed = Math.random() * 5 + 2;
+
+  rainDrops.push({ x, y, length, speed });
+}
+
+function drawRain() {
+  rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+
+  for (let i = 0; i < rainDrops.length; i++) {
+    const drop = rainDrops[i];
+
+    rainCtx.beginPath();
+    rainCtx.moveTo(drop.x, drop.y);
+    rainCtx.lineTo(drop.x, drop.y + drop.length);
+    rainCtx.strokeStyle = 'blue';
+    rainCtx.stroke();
+
+    drop.y += drop.speed;
+
+    if (drop.y > rainCanvas.height) {
+      rainDrops.splice(i, 1);
+      i--;
+    }
+  }
+
+  for (let i = 0; i < 2; i++) { // Tăng số lượng hạt mưa
+    createRainDrop();
+  }
+
+  requestAnimationFrame(drawRain);
+}
+
+function createSnowflake() {
+  const x = Math.random() * snowCanvas.width;
+  const y = Math.random() * snowCanvas.height;
+  const size = Math.random() * 5 + 0.2;
+  const speed = Math.random() * 2 + 1;
+
+  snowflakes.push({ x, y, size, speed });
+}
+
+function drawSnow() {
+  snowCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+  for (const flake of snowflakes) {
+    snowCtx.beginPath();
+    const radiusX = flake.size / 2 * 0.5; // Bán kính theo chiều rộng
+    const radiusY = flake.size / 2; // Bán kính theo chiều cao
+    const rotation = 0;
+    const startAngle = 0;
+    const endAngle = Math.PI * 2;
+
+    snowCtx.ellipse(flake.x, flake.y, radiusX, radiusY, rotation, startAngle, endAngle);
+    snowCtx.fillStyle = 'white'; // Màu sắc của tuyết
+    snowCtx.fill();
+
+    flake.y += flake.speed;
+
+    if (flake.y > canvasHeight) {
+      flake.y = 0;
+    }
+  }
+
+  if (Math.random() < 0.1) {
+    createSnowflake();
+  }
+
+  requestAnimationFrame(drawSnow);
+}
+
+const sun = {
+  x: canvasWidth / 2, // Vị trí theo chiều ngang
+  y: 0, // Vị trí theo chiều dọc (đặt y là 0 để nằm trên cùng)
+  width: 80, // Chiều rộng
+  height: 100 // Chiều cao
+};
+function drawHotWeather() {
+  sunCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+  // Vẽ hình ảnh mặt trời
+  sunCtx.drawImage(sunImage, sun.x - sun.width / 2, sun.y, sun.width, sun.height);
+
+  // Di chuyển mặt trời (có thể thay đổi tốc độ và hướng di chuyển)
+  sun.x += 2; // Di chuyển theo chiều ngang
+
+  if (sun.x > canvasWidth + sun.width / 2) {
+    sun.x = -sun.width / 2;
+  }
+
+  requestAnimationFrame(drawHotWeather);
+}
+// Hàm chuyển đổi ngẫu nhiên giữa các hiệu ứng
+function switchWeatherEffect() {
+  const randomEffect = Math.floor(Math.random() * 3);
+
+  // Tắt tất cả các hiệu ứng
+  sunCanvas.style.display = 'none';
+  rainCanvas.style.display = 'none';
+  snowCanvas.style.display = 'none';
+
+  // Bật hiệu ứng tương ứng
+  if (randomEffect === 0) {
+    drawHotWeather() 
+    sunCanvas.style.display = 'block';
+  } else if (randomEffect === 1) {
+    drawRain()
+    rainCanvas.style.display = 'block';
+  } else {
+    drawSnow()
+    snowCanvas.style.display = 'block';
+  }
+}
+
+// Gọi hàm để chuyển đổi hiệu ứng mỗi 5 giây
+setInterval(switchWeatherEffect, 5000);
 
 function draw() {
   ctx.save();

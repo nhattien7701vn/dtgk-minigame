@@ -109,3 +109,28 @@ body {
   width: 100%;
   height: 100%;
 }
+
+#rainCanvas,
+#snowCanvas,
+#sunCanvas {
+  height: 100%;
+  /* Đảm bảo thẻ canvas chiếm toàn bộ chiều cao của phần tử cha */
+  width: 100%;
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  /* Đảm bảo nó nằm trên canvas game */
+  user-select: none;
+  -webkit-touch-callout: none;
+  /* Safari */
+  -webkit-user-select: none;
+  /* Safari, Chrome, and Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by most modern browsers */
+}
