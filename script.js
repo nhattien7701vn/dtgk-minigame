@@ -70,7 +70,7 @@ sunCanvas.width = canvasWidth;
 sunCanvas.height = canvasHeight;
 
 const sunImage = new Image();
-sunImage.src = '/sun.png';
+sunImage.src = 'https://cdn.dienthoaigiakho.vn/photos/1700820976578-hapi-run.svg';
 
 const ctx = canvas.getContext("2d");
 
@@ -81,6 +81,12 @@ const scoreElement = document.getElementById("score");
 
 // Initialize layout
 resetGame();
+
+function generateCoreValue() {
+  var options = ["1. Mang tới trải nghiệm dịch vụ khách hàng hơn cả mong đợi (WOW Service)", "2. Làm đúng cam kết và nhận trách nhiệm", "3. Tinh thần tập thể yêu thương & hỗ trợ đồng đội", "4. Trung thực trong công việc và các mối quan hệ", "5. Chấp nhận thay đổi, cải tiến không ngừng"];
+  var randomValue = options[Math.floor(Math.random() * options.length)];
+  restartButton.innerText = randomValue;
+}
 
 // Resets game variables and layouts but does not start the game (game starts on keypress)
 function resetGame() {
@@ -94,7 +100,7 @@ function resetGame() {
   perfectElement.style.opacity = 0;
   restartButton.style.display = "none";
   scoreElement.innerText = score;
-
+  generateCoreValue()
   // The first platform is always the same
   // x + w has to match paddingX
   platforms = [{ x: 50, w: 50 }];
@@ -411,8 +417,8 @@ function drawSnow() {
 const sun = {
   x: canvasWidth / 2, // Vị trí theo chiều ngang
   y: 0, // Vị trí theo chiều dọc (đặt y là 0 để nằm trên cùng)
-  width: 80, // Chiều rộng
-  height: 100 // Chiều cao
+  width: 70, // Chiều rộng
+  height: 57 // Chiều cao
 };
 function drawHotWeather() {
   sunCtx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -440,7 +446,7 @@ function switchWeatherEffect() {
 
   // Bật hiệu ứng tương ứng
   if (randomEffect === 0) {
-    drawHotWeather() 
+    drawHotWeather()
     sunCanvas.style.display = 'block';
   } else if (randomEffect === 1) {
     drawRain()
@@ -478,6 +484,7 @@ function draw() {
 
 restartButton.addEventListener("click", function (event) {
   event.preventDefault();
+  generateCoreValue();
   resetGame();
   restartButton.style.display = "none";
 });
